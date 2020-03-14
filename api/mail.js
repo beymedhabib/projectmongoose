@@ -1,15 +1,19 @@
 var express = require("express")
 var nodemailer = require('nodemailer'); 
   var router = express.Router();
-  
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 let mailTransporter = nodemailer.createTransport({ 
-    service: 'Gmail', 
+    service: 'Gmail',
+    tls:{
+        rejectUnauthorized: false
+    },
+    port: 465,
+    secure: false,
     auth: { 
-        user: 'beymedhabib@gmail.com', 
+        user: 'beymedhabib@gmail.com',
         pass: 'haboub26413011'
     } 
-}); 
-  
+});
 router.post("/send", function (req,res) {
     let mailDetails = { 
         from: '<beymedhabib@gmail.com>', 
@@ -20,7 +24,7 @@ router.post("/send", function (req,res) {
     }; 
     mailTransporter.sendMail(mailDetails,(err, data)=> { 
           if(err) { 
-              console.log('Error Occurs'); 
+              console.log(err); 
               res.send(err)
             } else { 
                 console.log('Email sent successfully'); 
