@@ -1,12 +1,16 @@
 var express = require("express");
 var users = require("./../models/UserSchema")
+var register =require("./registerapi")
+var login = require("./loginapi");
 var router = express.Router();
-router.post("/insretdata",function (req, res) {
-    users.create(req.body, (err, resultat) => {
-        if (err) { res.send(err) };
-        res.send(resultat);
-    });
-});
+router.use('/register', register);
+router.use("/login",login);
+// router.post("/insretdata",function (req, res) {
+//     users.create(req.body, (err, resultat) => {
+//         if (err) { res.send(err) };
+//         res.send(resultat);
+//     });
+// });
 router.get("/getusers",function (req,res) {
     users.find({},(err, resultat) =>{
         if(err) res.send(err);
@@ -33,3 +37,9 @@ router.put("/updateuser/:id",function (req,res) {
 })
 
 module.exports = router;
+// function register(req, res, ) {
+//     users.create(req.body, (err, resultat) => {
+//                 if (err) { res.send(err) };
+//                 res.send(resultat);
+//             });
+// }

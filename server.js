@@ -8,12 +8,15 @@ var AffectTodoTouser = require("./api/AffectTodoToUser")
 var DeleleTodoFromUser =require("./api/DeleteTodoFromUser")
 var mail = require("./api/mail")
 var img = require("./api/imageapi")
+const passport = require('passport');
 // var router = express.Router();
 var app = express();
 
 app.use(jsonparser.json())
 app.use(jsonparser.urlencoded({extended:false}))
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use("/users", userapi);
 app.use("/todos", todos);
 app.use("/AffectTodoTouser", AffectTodoTouser);
