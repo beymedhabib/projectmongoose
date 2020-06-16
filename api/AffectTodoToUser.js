@@ -7,6 +7,7 @@ router.put("/updateuser/:id/:todoid", function (req, res) {
         res.send(resultat);
     })
 });
+
 router.get("/getusers", function (req, res) {
     users.find({}).populate('todos').exec(function (err, resultat) {
         if (err) res.send(err);
