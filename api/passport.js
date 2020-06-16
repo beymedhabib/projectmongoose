@@ -1,4 +1,3 @@
-// var express = require("express")
 var passport = require('passport')
 var BearerStrategy = require('passport-http-bearer');
 var userlogin =require("./../models/UserSchema")
